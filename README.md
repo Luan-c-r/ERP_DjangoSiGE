@@ -4,20 +4,25 @@ Sistema Integrado de Gestão Empresarial baseado em Django
 ## Instalação:
 1. Clone o repositorio:
    ```bash
+   git clone https://github.com/Luan-c-r/ERP_DjangoSiGE.git
+   ```
+   
+   1.1 Crie um ambiente virtual:
+   ```bash
    python.exe -m venv venv
    ```
    
-    1.1 Ative o ambiente virtual:
+   1.2 Ative o ambiente virtual:
    ```bash
    venv/scripts/activate
    ```
    
-   1.2 Atualizar o pip:
+   1.3 Atualizar o pip:
    ```bash
    python.exe -m pip install --upgrade pip
    ```
    
-2. Instalar dependências:
+3. Instalar dependências:
 
 ```bash
 pip install -r requirements.txt --only-binary=:all:
