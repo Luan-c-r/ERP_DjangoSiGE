@@ -15,21 +15,27 @@ Projeto independente open-source desenvolvido em Python 3 no Windows, testado no
 - [mod_wsgi](https://modwsgi.readthedocs.io/en/develop/) (Opcional)
 
 ## Instalação:
-
-0. Instalar as bibliotecas/pacotes (no Linux):
+1. Clone o repositorio:
+   ```bash
+   python.exe -m venv venv
+   ```
+   
+    1.1 Ative o ambiente virtual:
+   ```bash
+   venv/scripts/activate
+   ```
+   
+   1.2 Atualizar o pip:
+   ```bash
+   python.exe -m pip install --upgrade pip
+   ```
+   
+2. Instalar dependências:
 
 ```bash
-sudo apt install -y libxml2 gcc python3-dev libxml2-dev libxslt1-dev zlib1g-dev python3-pip
-sudo apt update
+pip install -r requirements.txt --only-binary=:all:
+
 ```
-
-1. Instalar dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-2. Edite o conteúdo do arquivo **djangosige/configs/configs.py**
 
 3. Gere um `.env` local
 
@@ -50,10 +56,11 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-6. Teste a instalação carregando o servidor de desenvolvimento (http://localhost:8000 no navegador):
+6. Teste a instalação carregando o servidor de desenvolvimento (http://localhost:8001 no navegador):
 
 ```bash
-python manage.py runserver
+python manage.py runserver 8001
+
 ```
 
 ## Implementações
@@ -72,16 +79,3 @@ python manage.py runserver
     - Comunicação com SEFAZ (Consulta de cadastro, inutilização de notas, manifestação do destinatário)
 - Interface simples e em português
 
-## Créditos
-
-- [AdminBSBMaterialDesign](https://github.com/gurayyarar/AdminBSBMaterialDesign)
-- [geraldo](https://github.com/marinho/geraldo)
-- [jQuery-Mask-Plugin](https://igorescobar.github.io/jQuery-Mask-Plugin/)
-- [DataTables](https://datatables.net/)
-- [JQuery multiselect](http://loudev.com/)
-
-## Ajuda
-
-Para relatar bugs ou fazer perguntas utilize o [Issues](https://github.com/thiagopena/djangoSIGE/issues) ou via email thiagopena01@gmail.com
-
-Como este é um projeto em desenvolvimento, qualquer feedback será bem-vindo.
