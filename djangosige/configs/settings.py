@@ -1,7 +1,7 @@
 import os
 from decouple import config, Csv
 from dj_database_url import parse as dburl
-from .configs import DEFAULT_DATABASE_URL, DEFAULT_FROM_EMAIL, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS
+from .defaults import DEFAULT_DATABASE_URL, DEFAULT_FROM_EMAIL, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS
 
 APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(APP_ROOT))
@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     # djangosige apps:
     'djangosige.apps.base',
     'djangosige.apps.login',
-    'djangosige.apps.cadastro',
+    'djangosige.apps.fiscal',
     'djangosige.apps.vendas',
     'djangosige.apps.compras',
-    'djangosige.apps.fiscal',
+    'djangosige.apps.cadastro',
     'djangosige.apps.financeiro',
     'djangosige.apps.estoque',
 ]
@@ -145,3 +145,5 @@ LOGIN_NOT_REQUIRED = (
     r'/login/trocarsenha/',
     r'/logout/',
 )
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
