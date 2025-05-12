@@ -15,6 +15,7 @@ urlpatterns = [
     path('compras/', include('djangosige.apps.compras.urls')),  # Substituído por path
     path('financeiro/', include('djangosige.apps.financeiro.urls')),  # Substituído por path
     path('estoque/', include('djangosige.apps.estoque.urls')),  # Substituído por path
+    path('saas/', include('djangosige.apps.saas.urls')), # Criado com path
 ]
 
 if DEBUG is True:

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'djangosige.apps.cadastro',
     'djangosige.apps.financeiro',
     'djangosige.apps.estoque',
+    'djangosige.apps.saas',
 ]
 
 
