@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from .base import ListView, AdicionarEmpresaView
+from ..models import EmpresaCliente
 
 class CadastrarEmpresaView(AdicionarEmpresaView):
     template_name = 'saas/cadastrar_empresa.html'
-    model = ''
+    model = 'EmpresaCliente'
     success_url = reverse_lazy('saas:addempresaview')
     success_message = "Empresa <b>%(nome_razao_social)s </b>adicionada com sucesso."
     permission_codename = 'add_empresa'
@@ -19,7 +20,7 @@ class CadastrarEmpresaView(AdicionarEmpresaView):
 
 class ListaEmpresasView(ListView):
     template_name = 'saas/lista_empresas.html'
-    model = ''
+    model = 'EmpresaCliente'
     success_url = reverse_lazy('saas:listaempresasview')
     permission_codename = 'view_empresas'
 
