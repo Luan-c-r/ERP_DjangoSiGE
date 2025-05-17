@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ title_complete }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="{{ add_url }}" class="btn btn-success">
+                                    <i class="material-icons">&#xE148;</i>
+                                    <span> ADICIONAR</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="lista-empresas" class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>CNPJ</th>
+                                            <th>Plano</th>
+                                            <th>Licença</th>
+                                            <th>Modelo</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for empresa in all_empresas %}
+                                        <tr>
+                                            <td>{{ empresa.nome }}</td>
+                                            <td>{{ empresa.cnpj }}</td>
+                                            <td>{{ empresa.plano.get_nome_display }}</td>
+                                            <td>{% if empresa.licenca %}{{ empresa.licenca.get_nome_display }}{% else %}-{% endif %}</td>
+                                            <td>{{ empresa.modelo_empresa.get_nome_display }}</td>
+                                            <td>
+                                                {% if empresa.licenca_ativa %}
+                                                <span class="badge badge-success">Ativa</span>
+                                                {% else %}
+                                                <span class="badge badge-danger">Inativa</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'saas:editarempresaview' empresa.id %}" class="btn btn-primary btn-sm">
+                                                    <i class="material-icons">&#xE254;</i>
+                                                </a>
+                                                <a href="{% url 'saas:listausuariosempresaview' empresa.id %}" class="btn btn-info btn-sm">
+                                                    <i class="material-icons">&#xE7FD;</i>
+                                                </a>
+                                                <a href="{% url 'saas:excluirempresaview' empresa.id %}" class="btn btn-danger btn-sm">
+                                                    <i class="material-icons">&#xE872;</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('#lista-empresas').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>
+{% endblock %}

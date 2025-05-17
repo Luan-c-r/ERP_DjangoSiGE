@@ -134,6 +134,28 @@
                                     Empresas
                                 </a>
                             </li>
+                            <li>
+                                <a href="{% url 'saas:listalicencasview' %}">
+                                    Licenças
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'saas:listaplanosview' %}">
+                                    Planos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'saas:listamodelosview' %}">
+                                    Modelos de Empresa
+                                </a>
+                            </li>
+                            {% if user_empresa %}
+                            <li>
+                                <a href="{% url 'saas:listausuariosempresaview' empresa.id %}">
+                                    Usuários
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">&#xE85D;</i>

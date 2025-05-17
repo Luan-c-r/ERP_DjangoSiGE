@@ -1,0 +1,88 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ title_complete }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="{{ add_url }}" class="btn btn-success">
+                                    <i class="material-icons">&#xE148;</i>
+                                    <span> ADICIONAR</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="lista-planos" class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Preço Mensal</th>
+                                            <th>Máx. Usuários</th>
+                                            <th>Atribuição de Cargo</th>
+                                            <th>Domínio Personalizado</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for plano in all_planos %}
+                                        <tr>
+                                            <td>{{ plano.get_nome_display }}</td>
+                                            <td>R$ {{ plano.preco_mensal }}</td>
+                                            <td>{{ plano.max_usuarios }}</td>
+                                            <td>
+                                                {% if plano.permite_atribuicao_cargo %}
+                                                <span class="badge badge-success">Sim</span>
+                                                {% else %}
+                                                <span class="badge badge-danger">Não</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if plano.permite_dominio_personalizado %}
+                                                <span class="badge badge-success">Sim</span>
+                                                {% else %}
+                                                <span class="badge badge-danger">Não</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'saas:editarplanoview' plano.id %}" class="btn btn-primary btn-sm">
+                                                    <i class="material-icons">&#xE254;</i>
+                                                </a>
+                                                <a href="{% url 'saas:excluirplanoview' plano.id %}" class="btn btn-danger btn-sm">
+                                                    <i class="material-icons">&#xE872;</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('#lista-planos').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>
+{% endblock %}

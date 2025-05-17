@@ -1,0 +1,88 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ title_complete }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <form role="form" method="post">
+                            {% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.nome.label }}</label>
+                                        {{ form.nome }}
+                                        {{ form.nome.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.descricao.label }}</label>
+                                        {{ form.descricao }}
+                                        {{ form.descricao.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.preco_mensal.label }}</label>
+                                        {{ form.preco_mensal }}
+                                        {{ form.preco_mensal.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.max_usuarios.label }}</label>
+                                        {{ form.max_usuarios }}
+                                        {{ form.max_usuarios.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            {{ form.permite_atribuicao_cargo }}
+                                            <label class="form-check-label">{{ form.permite_atribuicao_cargo.label }}</label>
+                                            {{ form.permite_atribuicao_cargo.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            {{ form.permite_dominio_personalizado }}
+                                            <label class="form-check-label">{{ form.permite_dominio_personalizado.label }}</label>
+                                            {{ form.permite_dominio_personalizado.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-success" type="submit">SALVAR</button>
+                                        <a href="{{ return_url }}" class="btn btn-danger">CANCELAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

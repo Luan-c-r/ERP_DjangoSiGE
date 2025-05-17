@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ title_complete }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="{{ add_url }}" class="btn btn-success">
+                                    <i class="material-icons">&#xE148;</i>
+                                    <span> ADICIONAR</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="lista-modelos" class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Descrição</th>
+                                            <th>Apps Disponíveis</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for modelo in all_modelos %}
+                                        <tr>
+                                            <td>{{ modelo.get_nome_display }}</td>
+                                            <td>{{ modelo.descricao }}</td>
+                                            <td>{{ modelo.apps_disponiveis }}</td>
+                                            <td>
+                                                <a href="{% url 'saas:editarmodeloview' modelo.id %}" class="btn btn-primary btn-sm">
+                                                    <i class="material-icons">&#xE254;</i>
+                                                </a>
+                                                <a href="{% url 'saas:excluirmodeloview' modelo.id %}" class="btn btn-danger btn-sm">
+                                                    <i class="material-icons">&#xE872;</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('#lista-modelos').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+            }
+        });
+    });
+</script>
+{% endblock %}

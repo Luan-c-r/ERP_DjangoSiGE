@@ -1,0 +1,165 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ title_complete }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <form role="form" method="post">
+                            {% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.nome.label }}</label>
+                                        {{ form.nome }}
+                                        {{ form.nome.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.cnpj.label }}</label>
+                                        {{ form.cnpj }}
+                                        {{ form.cnpj.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.inscricao_estadual.label }}</label>
+                                        {{ form.inscricao_estadual }}
+                                        {{ form.inscricao_estadual.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.telefone.label }}</label>
+                                        {{ form.telefone }}
+                                        {{ form.telefone.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.email.label }}</label>
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.endereco.label }}</label>
+                                        {{ form.endereco }}
+                                        {{ form.endereco.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{ form.plano.label }}</label>
+                                        {{ form.plano }}
+                                        {{ form.plano.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{ form.licenca.label }}</label>
+                                        {{ form.licenca }}
+                                        {{ form.licenca.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{ form.modelo_empresa.label }}</label>
+                                        {{ form.modelo_empresa }}
+                                        {{ form.modelo_empresa.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.dominio_personalizado.label }}</label>
+                                        {{ form.dominio_personalizado }}
+                                        {{ form.dominio_personalizado.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{ form.observacoes.label }}</label>
+                                        {{ form.observacoes }}
+                                        {{ form.observacoes.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-success" type="submit">SALVAR</button>
+                                        <a href="{{ return_url }}" class="btn btn-danger">CANCELAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        // Função para atualizar campos baseados no plano selecionado
+        function atualizarCamposPorPlano() {
+            var planoSelecionado = $('#id_plano').val();
+            
+            // Obter o texto do plano selecionado
+            var planoTexto = $('#id_plano option:selected').text();
+            
+            // Se for plano Free, desabilitar licença
+            if (planoTexto.includes('Free')) {
+                $('#id_licenca').prop('disabled', true);
+                $('#id_licenca').val('');
+                $('#id_dominio_personalizado').prop('disabled', true);
+                $('#id_dominio_personalizado').val('');
+            } else {
+                $('#id_licenca').prop('disabled', false);
+                
+                // Se for plano Premium, habilitar domínio personalizado
+                if (planoTexto.includes('Premium')) {
+                    $('#id_dominio_personalizado').prop('disabled', false);
+                } else {
+                    $('#id_dominio_personalizado').prop('disabled', true);
+                    $('#id_dominio_personalizado').val('');
+                }
+            }
+        }
+        
+        // Executar ao carregar a página
+        atualizarCamposPorPlano();
+        
+        // Executar quando o plano for alterado
+        $('#id_plano').change(function() {
+            atualizarCamposPorPlano();
+        });
+    });
+</script>
+{% endblock %}
